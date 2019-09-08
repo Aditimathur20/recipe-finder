@@ -1,18 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import axios from 'axios';
+import styled from 'styled-components';
+import RecipeCard from './components/RecipeCard';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          
-        </p>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      meal: {}
+    }
+  }
+
+  componentDidMount(){
+    const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=Pasta';
+
+    axios.get(URL)
+      .then(res => {
+        const meal = res.data.meals;
+        if(typeof meal === 'object'){
+          this.setState({ meal });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+  }
+
+  render() {
+    var data = this.state.meal;
+    return (
+      <AppContainer className="App">
+        {data.length > 0 && <RecipeCard meals={data} />}
+      </AppContainer>
+    );
+  }
 }
 
-export default App;
+const AppContainer = styled.div`
+  background: #fff;
+  padding: 2em;
+`
