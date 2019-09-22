@@ -143,7 +143,7 @@ class App extends Component {
           <p />
         )}
 
-        {this.state.isMeal ? <p /> : <p className='wcMessage'>Not found</p>}
+        {this.state.isMeal ? <p /> : <p className='wcMessage'>No Data Has been recieved </p>}
       </div>
     );
   }

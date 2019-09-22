@@ -7,5 +7,6 @@ body {
 .wcMessage {
   text-align: center;
   font-weight: bold;
+  padding-left: 30px;
   font-size: 25px;
 }
